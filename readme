@@ -1,0 +1,167 @@
+#  Project - API eCommerce -by Fatou GUEYE
+
+### IDE
+		Intellij
+
+### Main Dependencies
+		Spring Boot
+		Spring Security
+		Spring Data JPA
+		Lombok
+		junit-jupiter-api
+		Base de donnee H2 (sql in memory)
+		
+### Finished Function
+	• Afficher un catalogue de produits
+	• Afficher le détail d’un produit
+	• Ajouter un produit au panier
+	• Enlever un produit du panier
+	• Afficher le contenu du panier
+
+
+### API 
+ /categories
+      POST / - Add categoty - required :  name 
+ /product
+	  GET / - List of products
+	  POST / - Add product - required :  name , price, description,categoryId
+	  GET /{id} - View product
+	  DELETE /{id} - Delete product
+/rest/cart
+   POST /{productId} -Ajouter Produit au panier -required :quantite ,productId,cartId
+   DELETE /{cartItemId} -Retirer Produit au panier
+   
+/panier
+  GET /{cartId} -Afficher le contenu du panier
+  POST / initialiser un panier -required :customer
+  
+  ### test integration with postman
+  - Categories
+  curl -X POST \
+  http://localhost:8080/categories \
+  -H 'Accept: */*' \
+  -H 'Accept-Encoding: gzip, deflate' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Length: 33' \
+  -H 'Content-Type: application/json;charset=UTF-8' \
+  -H 'Cookie: JSESSIONID=B01021DEC85FC1AD6097D0D2024E6604' \
+  -H 'Host: localhost:8080' \
+  -H 'Postman-Token: 34b644c8-8b54-486b-b4e0-1de90b2c56e4,83871ac5-805b-48f7-9d4f-ef383b1e232f' \
+  -H 'User-Agent: PostmanRuntime/7.16.3' \
+  -H 'cache-control: no-cache' \
+  -d '{
+   "nomCategorie": "imprimerie"}'
+   
+   
+   -Ajouter Produit
+   
+   curl -X POST \
+  http://localhost:8080/product \
+  -H 'Accept: */*' \
+  -H 'Accept-Encoding: gzip, deflate' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Length: 78' \
+  -H 'Content-Type: application/json;charset=UTF-8' \
+  -H 'Cookie: JSESSIONID=B01021DEC85FC1AD6097D0D2024E6604' \
+  -H 'Host: localhost:8080' \
+  -H 'Postman-Token: 3a61a6d7-526d-45bf-a03c-380f5ffa26ce,2c08333a-cc33-48c4-81aa-e5dcbe2b241e' \
+  -H 'User-Agent: PostmanRuntime/7.16.3' \
+  -H 'cache-control: no-cache' \
+  -d '{
+	"name": "bic",
+	"price":"100",
+	"description":"stylo",
+	"categorie_id":"165"
+
+	}'
+	
+	-Afficher Liste des produits
+	curl -X GET \
+  http://localhost:8080/product \
+  -H 'Accept: */*' \
+  -H 'Accept-Encoding: gzip, deflate' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Length: 78' \
+  -H 'Content-Type: application/json;charset=UTF-8' \
+  -H 'Cookie: JSESSIONID=B01021DEC85FC1AD6097D0D2024E6604' \
+  -H 'Host: localhost:8080' \
+  -H 'Postman-Token: 78307e24-3659-40d3-8cdc-9c3c9fabe4b7,b4557835-6dd6-4584-bebc-ec40fe837b37' \
+  -H 'User-Agent: PostmanRuntime/7.16.3' \
+  -H 'cache-control: no-cache' \
+  -d '{
+	"name": "bic",
+	"price":"100",
+	"description":"stylo",
+	"categorie_id":"165"
+   }'
+   
+   
+   -Initialiser un panier 
+   curl -X POST \
+  http://localhost:8080/panier \
+  -H 'Accept: */*' \
+  -H 'Accept-Encoding: gzip, deflate' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Length: 34' \
+  -H 'Content-Type: text/plain' \
+  -H 'Cookie: JSESSIONID=B01021DEC85FC1AD6097D0D2024E6604' \
+  -H 'Host: localhost:8080' \
+  -H 'Postman-Token: 29d73ba2-4ced-4bc2-bdcd-dced29413120,b88c9e6c-5384-4698-a3df-dc6bad995256' \
+  -H 'User-Agent: PostmanRuntime/7.16.3' \
+  -H 'cache-control: no-cache' \
+  -d '{
+"cartItems":[],
+"customerId":2
+}'
+
+-Ajouter un produit au panier curl -X POST \
+  'http://localhost:8080/rest/cart/1?q=4&productId=1&cartId=3' \
+  -H 'Accept: */*' \
+  -H 'Accept-Encoding: gzip, deflate' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Length: ' \
+  -H 'Cookie: JSESSIONID=B01021DEC85FC1AD6097D0D2024E6604' \
+  -H 'Host: localhost:8080' \
+  -H 'Postman-Token: 436ba5af-99b6-462d-a410-71211881bcb3,d2ff1e4d-6309-475a-9956-d4774f65d2f1' \
+  -H 'User-Agent: PostmanRuntime/7.16.3' \
+  -H 'cache-control: no-cache'
+  
+  -Afficher la liste des produits panier
+  
+  curl -X GET \
+  http://localhost:8080/panier/3 \
+  -H 'Accept: */*' \
+  -H 'Accept-Encoding: gzip, deflate' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Length: 34' \
+  -H 'Content-Type: text/plain' \
+  -H 'Cookie: JSESSIONID=B01021DEC85FC1AD6097D0D2024E6604' \
+  -H 'Host: localhost:8080' \
+  -H 'Postman-Token: 30e97b59-28c1-4a7a-8f13-b6831807590b,361e0120-27da-401e-8691-b15c772c4c7e' \
+  -H 'User-Agent: PostmanRuntime/7.16.3' \
+  -H 'cache-control: no-cache' \
+  -d '{
+"cartItems":[],
+"customerId":2
+}'
+
+-retirer un produit panier
+
+curl -X DELETE \
+  http://localhost:8080/rest/cart/5 \
+  -H 'Accept: */*' \
+  -H 'Accept-Encoding: gzip, deflate' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Length: ' \
+  -H 'Cookie: JSESSIONID=B01021DEC85FC1AD6097D0D2024E6604' \
+  -H 'Host: localhost:8080' \
+  -H 'Postman-Token: 743b24fe-6acf-4eb7-ad88-0bba03a88cd3,276be328-0eec-4405-a859-7c99054a91c7' \
+  -H 'User-Agent: PostmanRuntime/7.16.3' \
+  -H 'cache-control: no-cache'
