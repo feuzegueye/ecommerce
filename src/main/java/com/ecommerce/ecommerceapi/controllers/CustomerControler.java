@@ -16,10 +16,10 @@ import javax.validation.Valid;
 @RequestMapping("/client")
 public class CustomerControler {
     @Autowired
-    private EcommerceService ecomerceService;
+    private EcommerceService ecommerceService;
 
     @PostMapping
     public Customer save(@RequestBody @Valid Customer customer){
-        return ecomerceService.saveCustomer(customer);
+        return ecommerceService.saveCustomer(customer);
     }
 }
