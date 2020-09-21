@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-              git clone  'https://github.com/feuzegueye/ecommerce.git'      
+             bat 'mvn clean compile'     
             }
         }
         stage('Test') {
