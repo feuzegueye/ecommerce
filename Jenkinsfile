@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-               mvn package
+               mvn --version           
             }
         }
         stage('Test') {
