@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-               mvn package         
+              git clone  'https://github.com/feuzegueye/ecommerce.git'      
             }
         }
         stage('Test') {
